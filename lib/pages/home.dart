@@ -71,10 +71,12 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        selectedIconTheme: IconThemeData(color: Colors.deepPurple),
         currentIndex: _selectedIndex,
         onTap: _navigateBottomBar,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.bolt), label: 'Actions'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bolt), label: 'Actions'),
           BottomNavigationBarItem(
             icon: Icon(Icons.class_rounded),
             label: 'Sessions',

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "664119047513",
+    "project_id": "bars-system",
+    "storage_bucket": "bars-system.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664119047513:android:ed2cec50cba3623754c848",
+        "android_client_info": {
+          "package_name": "com.example.bars"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfjt7Y6ziVpJVXDn4lk7D0jkiwCiXVqrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
