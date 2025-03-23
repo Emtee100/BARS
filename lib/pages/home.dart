@@ -17,6 +17,7 @@ class _HomeState extends State<Home> {
   bool isButtonPressed = false;
   int _selectedIndex = 0;
 
+  //Mark register button function
   void MarkRegPressed() {
     setState(() {
       isMarkRegPressed = !isMarkRegPressed;
@@ -25,7 +26,7 @@ class _HomeState extends State<Home> {
       MaterialPageRoute(builder: (context) => const MarkRegisterPage()),
     );
   }
-
+//Enroll button function
   void buttonPressed() {
     setState(() {
       isButtonPressed = !isButtonPressed;
@@ -34,13 +35,15 @@ class _HomeState extends State<Home> {
       MaterialPageRoute(builder: (context) => const EnrollPage()),
     );
   }
-
+//Handling navigation between pages
   void _navigateBottomBar(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
+
+  // the two buttons Enrol and Mark register
   @override
   Widget build(BuildContext context) {
     List<Widget> pages = [
@@ -58,6 +61,7 @@ class _HomeState extends State<Home> {
       const Center(child: Text("Profile", style: TextStyle(fontSize: 50))),
     ];
 
+    //Displays the content of the selected page
     return Scaffold(
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(

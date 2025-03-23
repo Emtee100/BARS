@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:bars/pages/session_view.dart';
 
+// Seesion definition as a stateful widget
 class SessionsPage extends StatefulWidget {
   const SessionsPage({super.key});
 
@@ -9,13 +10,16 @@ class SessionsPage extends StatefulWidget {
   State<SessionsPage> createState() => _SessionsPageState();
 }
 
+//Class Definition
 class _SessionsPageState extends State<SessionsPage> {
   final List<Map<String, String>> sessions = [];
 
+//State Variables (Text-Editing controllers for capturing user's data )
   final TextEditingController unitNameController = TextEditingController();
   final TextEditingController unitCodeController = TextEditingController();
   final TextEditingController dateTimeController = TextEditingController();
 
+  //Date-Time picker library
   Future<void> _pickDateTime() async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -50,7 +54,7 @@ class _SessionsPageState extends State<SessionsPage> {
       }
     }
   }
-
+//Adding session function
   void _addSession() {
     if (unitNameController.text.isNotEmpty &&
         unitCodeController.text.isNotEmpty &&
@@ -70,6 +74,7 @@ class _SessionsPageState extends State<SessionsPage> {
     }
   }
 
+  //Building the page structure (UI)
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +86,7 @@ class _SessionsPageState extends State<SessionsPage> {
           children: [
             const Text("Create Session",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            //Input fields for creating a session
             TextField(
                 controller: unitNameController,
                 decoration: const InputDecoration(labelText: "Unit Name")),
@@ -98,6 +104,7 @@ class _SessionsPageState extends State<SessionsPage> {
             ),
             const SizedBox(height: 10),
             Center(
+              //Button for creating a session
               child: ElevatedButton(
                 onPressed: _addSession,
                 style: ElevatedButton.styleFrom(
@@ -106,6 +113,8 @@ class _SessionsPageState extends State<SessionsPage> {
                 child: const Text("Create Session"),
               ),
             ),
+
+            //Displaying sessions on a drop down
             const SizedBox(height: 20),
             const Text("View Sessions",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
@@ -122,6 +131,7 @@ class _SessionsPageState extends State<SessionsPage> {
               }).toList(),
               onChanged: (selectedSession) {
                 if (selectedSession != null) {
+                  //Navigate to session view page
                   Navigator.push(
                     context,
                     MaterialPageRoute(

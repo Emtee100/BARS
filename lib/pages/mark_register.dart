@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//Mark Register widget
 class MarkRegisterPage extends StatefulWidget {
   const MarkRegisterPage({Key? key}) : super(key: key);
 
   @override
   State<MarkRegisterPage> createState() => _MarkRegisterPageState();
 }
-
+// State management
 class _MarkRegisterPageState extends State<MarkRegisterPage> {
   // Track fingerprint scanning status
   bool _isScanningFingerprint = false;
@@ -44,6 +45,8 @@ class _MarkRegisterPageState extends State<MarkRegisterPage> {
     );
   }
 
+  //Building the UI and page structure
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +67,7 @@ class _MarkRegisterPageState extends State<MarkRegisterPage> {
             ),
             const SizedBox(height: 50),
 
-            // Fingerprint section
+            // Fingerprint button
             Column(
               children: [
                 ElevatedButton(
