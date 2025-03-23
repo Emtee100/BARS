@@ -1,6 +1,8 @@
 import 'package:bars/pages/enroll.dart';
-import 'package:bars/widgets/markregbutton.dart';
+import 'package:bars/pages/mark_register.dart';
+import 'package:bars/pages/sessions.dart';
 import 'package:bars/widgets/sessbutton.dart';
+import 'package:bars/widgets/markregbutton.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -12,32 +14,26 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool isMarkRegPressed = false;
+  bool isButtonPressed = false;
+  int _selectedIndex = 0;
+
   void MarkRegPressed() {
     setState(() {
-      if (isMarkRegPressed == false) {
-        isMarkRegPressed = true;
-      } else if (isMarkRegPressed == true) {
-        isMarkRegPressed = false;
-      }
+      isMarkRegPressed = !isMarkRegPressed;
     });
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const MarkRegisterPage()),
+    );
   }
 
-  bool isButtonPressed = false;
   void buttonPressed() {
     setState(() {
-      if (isButtonPressed == false) {
-        isButtonPressed = true;
-      } else if (isButtonPressed == true) {
-        isButtonPressed = false;
-      }
+      isButtonPressed = !isButtonPressed;
     });
-
-    Navigator.of(
-      context,
-    ).push(MaterialPageRoute(builder: (Context) => const EnrollPage()));
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => const EnrollPage()),
+    );
   }
-
-  int _selectedIndex = 0;
 
   void _navigateBottomBar(int index) {
     setState(() {
@@ -45,40 +41,31 @@ class _HomeState extends State<Home> {
     });
   }
 
-  void initState() {
-    super.initState();
-  }
-
-  List<Widget> get _pages => [
-    Center(
-      child: Column(
-        children: [
-          SizedBox(height: 150),
-          Sessbutton(onTap: buttonPressed, isButtonPressed: isButtonPressed),
-          SizedBox(height: 20),
-          MarkReg(onTap: MarkRegPressed, isMarkRegPressed: isMarkRegPressed),
-        ],
-      ),
-    ),
-
-    Center(child: Text("Session", style: TextStyle(fontSize: 50))),
-
-    Center(child: Text("Profile", style: TextStyle(fontSize: 50))),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    List<Widget> pages = [
+      Center(
+        child: Column(
+          children: [
+            const SizedBox(height: 150),
+            Sessbutton(onTap: buttonPressed, isButtonPressed: isButtonPressed),
+            const SizedBox(height: 20),
+            MarkReg(onTap: MarkRegPressed, isMarkRegPressed: isMarkRegPressed),
+          ],
+        ),
+      ),
+      const SessionsPage(), // Integrated SessionsPage
+      const Center(child: Text("Profile", style: TextStyle(fontSize: 50))),
+    ];
+
     return Scaffold(
-      body: _pages[_selectedIndex],
+      body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _navigateBottomBar,
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.bolt), label: 'Actions'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.class_rounded),
-            label: 'Sessions',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.class_rounded), label: 'Sessions'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
