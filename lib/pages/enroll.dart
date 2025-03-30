@@ -60,7 +60,7 @@ class _EnrollPageState extends State<EnrollPage> {
       _fingerprintStatus = 'Please place your finger on the scanner...';
     });
 
-    final url = Uri.parse('http://192.168.88.115/data');
+    final url = Uri.parse('http://192.168.39.227/data');
     try {
       final response = await http.post(
         url,
@@ -72,21 +72,6 @@ class _EnrollPageState extends State<EnrollPage> {
       );
       if (response.statusCode == 200) {
         print('ESP32 Response: ${response.body}');
-        // FirebaseFirestore.instance.collection("students").add({
-        //   "AdmNo": _admNoController.text.trim(),
-        //   "fullName": _nameController.text.trim(),
-        //   "fid": int.parse(response.body),
-        // });
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //   SnackBar(
-        //     content: Text('Enrolled fingerprint ${response.body}'),
-        //     margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        //   ),
-        // );
-        // _admNoController.clear();
-        // _nameController.clear();
-        // _idController.clear();
-
         // stop the onboarding animation
         setState(() {
           _isScanningFingerprint = false;
@@ -94,9 +79,13 @@ class _EnrollPageState extends State<EnrollPage> {
           _fingerprintStatus = 'Fingerprint successfully scanned!';
         });
       } else {
-        print(
-          'Failed to send data. Status code: ${response.statusCode}, ${response.body}',
-        );
+        ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        //margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        content: Text('Failed to enroll the user\'s fingerprint!'),
+      ),
+    );
       }
     } catch (e) {
       print('Error sending data: $e');
@@ -127,12 +116,12 @@ class _EnrollPageState extends State<EnrollPage> {
     FirebaseFirestore.instance.collection("students").add({
       "AdmNo": _admissionNumberController.text.trim(),
       "fullName": _nameController.text.trim(),
-      "fid": _idNumberController.text.trim(),
+      "fid":int.parse( _idNumberController.text.trim()),
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        //margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         content: Text('Enrollment successful!'),
       ),
